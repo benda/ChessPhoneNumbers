@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChessPhoneNumbers.Graphs
+namespace ChessPhoneNumbers.Paths
 {
-    class Graph<T>
+    enum Direction
     {
-        public List<Vertex<T>> Vertices { get; } = new List<Vertex<T>>();
+        Up,
+        Down,
+        Left,
+        Right
     }
 }

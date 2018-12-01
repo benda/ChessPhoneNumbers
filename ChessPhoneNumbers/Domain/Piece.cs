@@ -9,7 +9,7 @@ namespace ChessPhoneNumbers.Domain
 {
     abstract class Piece
     {
-        public Vertex<Key> Position { get; }
+        public Vertex<Key> Position { get; set; }
 
         public abstract IEnumerable<Vertex<Key>> GetNextPotentialMoves();
     }

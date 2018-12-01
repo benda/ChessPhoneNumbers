@@ -61,6 +61,7 @@
     <Compile Include="Domain\Knight.cs" />
     <Compile Include="Domain\Rook.cs" />
     <Compile Include="Domain\Pawn.cs" />
+    <Compile Include="Paths\Direction.cs" />
     <Compile Include="Utility\Enum\AbstractTypeSafeEnum.cs" />
     <Compile Include="Utility\Enum\AbstractTypeSafeEnumManager.cs" />
     <Compile Include="Graphs\Edge.cs" />

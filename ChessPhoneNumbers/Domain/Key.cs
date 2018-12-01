@@ -26,7 +26,23 @@ namespace ChessPhoneNumbers.Domain
         public bool IsValue(int value)
         {
             return Digit == value;
-        }        
+        }
+
+        public override bool Equals(object obj)
+        {
+            var key = obj as Key;
+            return key != null &&
+                   EqualityComparer<int?>.Default.Equals(Digit, key.Digit) &&
+                   EqualityComparer<char?>.Default.Equals(Character, key.Character);
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -569536490;
+            hashCode = hashCode * -1521134295 + EqualityComparer<int?>.Default.GetHashCode(Digit);
+            hashCode = hashCode * -1521134295 + EqualityComparer<char?>.Default.GetHashCode(Character);
+            return hashCode;
+        }
 
         public bool IsCharacter {  get { return Character != null; } }
     }

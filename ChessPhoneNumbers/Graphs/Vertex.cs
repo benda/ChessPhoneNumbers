@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ChessPhoneNumbers.Graphs
 {
     [DebuggerDisplay("{Item}")]
-    class Vertex<T>
+    class Vertex<T>  
     {
         public LinkedList<Edge<T>> Edges { get; } = new LinkedList<Edge<T>>();
         public T Item { get; }
@@ -16,6 +16,18 @@ namespace ChessPhoneNumbers.Graphs
         public Vertex(T item)
         {
             Item = item;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var vertex = obj as Vertex<T>;
+            return vertex != null &&
+                   EqualityComparer<T>.Default.Equals(Item, vertex.Item);
+        }
+
+        public override int GetHashCode()
+        {
+            return -979861770 + EqualityComparer<T>.Default.GetHashCode(Item);
         }
     }
 }

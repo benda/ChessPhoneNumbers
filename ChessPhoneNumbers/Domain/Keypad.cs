@@ -9,11 +9,11 @@ namespace ChessPhoneNumbers.Domain
 {
     class Keypad
     {
-        public Graph<Key> _graph { get; }
+        public Graph<Key> Graph { get; }
 
         public Keypad(Graph<Key> graph)
         {
-            _graph = graph;
+            Graph = graph;
         }
     }
 }

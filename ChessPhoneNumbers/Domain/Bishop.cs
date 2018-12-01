@@ -11,7 +11,24 @@ namespace ChessPhoneNumbers.Domain
     {
         public override IEnumerable<Vertex<Key>> GetNextPotentialMoves()
         {
-            throw new NotImplementedException();
+            var moves = new List<Vertex<Key>>();
+
+            foreach (var edge in Position.Edges)
+            {
+                if (edge.EdgeType == EdgeType.Diagonal)
+                {
+                    if (edge.VertexA == Position)
+                    {
+                        moves.Add(edge.VertexB);
+                    }
+                    else
+                    {
+                        moves.Add(edge.VertexA);
+                    }
+                }              
+            }
+
+            return moves;
         }
     }
 }
