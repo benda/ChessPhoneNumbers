@@ -13,7 +13,7 @@ namespace ChessPhoneNumbers.PhoneNumbers
 
         public int FindAllPhoneNumbers(Piece piece)
         {
-            Pathfinder pf = new Pathfinder();
+            Pathfinder pf = new Pathfinder(new Keypad();
             return (from p in pf.FindAllPaths(piece, MaximumNumberOfDigitsInPhoneNumber) where IsValidPhoneNumber(p) select p).Count();
         }
 

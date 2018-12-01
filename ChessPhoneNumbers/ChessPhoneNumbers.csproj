@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utility\ResourceReader.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -64,6 +65,9 @@
     </Compile>
     <Compile Include="Domain\Key.cs" />
     <Compile Include="Domain\Keypad.cs" />
+    <Compile Include="Graphs\Graph.cs" />
+    <Compile Include="Graphs\GraphReader.cs" />
+    <Compile Include="Graphs\Vertex.cs" />
     <Compile Include="Paths\Path.cs" />
     <Compile Include="Paths\Pathfinder.cs" />
     <Compile Include="Domain\Piece.cs" />
@@ -99,6 +103,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="graph.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="keypad.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

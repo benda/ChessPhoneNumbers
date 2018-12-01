@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChessPhoneNumbers.Graphs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,11 @@ namespace ChessPhoneNumbers.Domain
 {
     class Keypad
     {
+        public Graph<Key> _graph { get; }
+
+        public Keypad(Graph<Key> graph)
+        {
+            _graph = graph;
+        }
     }
 }
