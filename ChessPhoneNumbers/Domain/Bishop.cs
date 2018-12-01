@@ -13,6 +13,5 @@ namespace ChessPhoneNumbers.Domain
         {
             throw new NotImplementedException();
         }
-
     }
 }

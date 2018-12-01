@@ -11,6 +11,10 @@ namespace ChessPhoneNumbers.Domain
     {
         public static readonly Pieces Pawn = new Pieces("Pawn", new Pawn());
         public static readonly Pieces Bishop = new Pieces("Bishop", new Bishop());
+        public static readonly Pieces Knight = new Pieces("Knight", new Knight());
+        public static readonly Pieces Rook = new Pieces("Rook", new Rook());
+        public static readonly Pieces Queen = new Pieces("Queen", new Queen());
+        public static readonly Pieces King = new Pieces("King", new King());
 
         static Pieces() { }
 
