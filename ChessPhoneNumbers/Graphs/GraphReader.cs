@@ -1,10 +1,10 @@
-﻿using ChessPhoneNumbers.Utility;
+﻿using ChessPhoneNumbers.Domain;
+using ChessPhoneNumbers.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace ChessPhoneNumbers.Graphs
 {
@@ -12,9 +12,14 @@ namespace ChessPhoneNumbers.Graphs
     {
         public Graph<Key> Read(String resourceName)
         {
-            string graph = new ResourceReader().Get(resourceName);
+            //TODO: read graph from file
+            //            string graph = new ResourceReader().Get(resourceName);
+
+            Graph<Key> graph = new Graph<Key>();
+            graph.Vertices.Add(new Vertex<Key>(new Key(1)));
 
 
+            return graph;
         }
     }
 }

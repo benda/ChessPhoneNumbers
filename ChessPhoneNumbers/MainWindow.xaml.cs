@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChessPhoneNumbers.PhoneNumbers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace ChessPhoneNumbers
         public MainWindow()
         {
             InitializeComponent();
+            new PhoneNumberService().FindAllPhoneNumbers(new Domain.Piece());
         }
     }
 }

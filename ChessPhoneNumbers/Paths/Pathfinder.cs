@@ -8,6 +8,13 @@ namespace ChessPhoneNumbers.Domain
 {
     class Pathfinder
     {
+        private Keypad _keypad;
+
+        public Pathfinder(Keypad keypad)
+        {
+            _keypad = keypad;
+        }
+
         public List<Path> FindAllPaths(Piece piece, int maximumNumberOfKeysInPath)
         {
             List<Path> paths = new List<Path>();

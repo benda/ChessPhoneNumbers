@@ -1,4 +1,5 @@
 ﻿using ChessPhoneNumbers.Domain;
+using ChessPhoneNumbers.Graphs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,8 @@ namespace ChessPhoneNumbers.PhoneNumbers
 
         public int FindAllPhoneNumbers(Piece piece)
         {
-            Pathfinder pf = new Pathfinder(new Keypad();
+            Pathfinder pf = new Pathfinder(new Keypad(new GraphReader().Read("graph.txt")));
+
             return (from p in pf.FindAllPaths(piece, MaximumNumberOfDigitsInPhoneNumber) where IsValidPhoneNumber(p) select p).Count();
         }
 

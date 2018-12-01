@@ -11,6 +11,16 @@ namespace ChessPhoneNumbers.Domain
         public int? Digit { get; }
         public char? Character { get; }
 
+        public Key(int digit)
+        {
+            Digit = digit;
+        }
+
+        public Key(char character)
+        {
+            Character = character;
+        }
+
         public bool IsValue(int value)
         {
             return Digit == value;

@@ -8,7 +8,7 @@ namespace ChessPhoneNumbers.Graphs
 {
     class Graph<T>
     {
-        public List<Vertex<T>> Nodes { get; } = new List<Vertex<T>>();
+        public List<Vertex<T>> Vertices { get; } = new List<Vertex<T>>();
 
     }
 }
