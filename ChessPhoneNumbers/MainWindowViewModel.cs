@@ -11,6 +11,8 @@ namespace ChessPhoneNumbers
 {
     class MainWindowViewModel : NotifyPropertyChangedEntity
     {
+        private int? _numberOfPhoneNumbers;
+
         public MainWindowViewModel()
         {
             AllPieces = Pieces.GetValues();
@@ -18,10 +20,19 @@ namespace ChessPhoneNumbers
 
         public void Find()
         {
-            new PhoneNumberService().FindAllPhoneNumbers(SelectedPiece.Piece);
+            NumberOfPhoneNumbers = new PhoneNumberService().FindAllPhoneNumbers(SelectedPiece.Piece);
         }
 
-        public int NumberOfPhoneNumbers { get; }
+        public int? NumberOfPhoneNumbers
+        {
+            get { return _numberOfPhoneNumbers; }
+
+            set
+            {
+                _numberOfPhoneNumbers = value;
+                OnPropertyChanged(nameof(NumberOfPhoneNumbers));
+            }
+        }
 
         public IEnumerable<Pieces> AllPieces { get; private set; }
 

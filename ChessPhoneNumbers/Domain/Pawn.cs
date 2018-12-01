@@ -11,8 +11,7 @@ namespace ChessPhoneNumbers.Domain
     {
         public override IEnumerable<Vertex<Key>> GetNextPotentialMoves()
         {
-            throw new NotImplementedException();
+            return new List<Vertex<Key>>(); //we know pawn has no valid phone number so no need to implement
         }
-
     }
 }

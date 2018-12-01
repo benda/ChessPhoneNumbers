@@ -12,6 +12,10 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <ComboBox Margin="10" MinWidth="100" ItemsSource="{Binding AllPieces}" SelectedItem="{Binding SelectedPiece}" HorizontalAlignment="Center" VerticalAlignment="Center">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -20,5 +24,6 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Button Grid.Column="1" Margin="10" Click="Button_Click" HorizontalAlignment="Center" VerticalAlignment="Center">Find</Button>
+        <TextBlock Grid.Row="1" Text="{Binding NumberOfPhoneNumbers}" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="20"/>
     </Grid>
 </Window>
