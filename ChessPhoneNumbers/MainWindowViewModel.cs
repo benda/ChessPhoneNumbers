@@ -18,7 +18,7 @@ namespace ChessPhoneNumbers
 
         public void Find()
         {
-            new PhoneNumberService().FindAllPhoneNumbers(new Bishop());
+            new PhoneNumberService().FindAllPhoneNumbers(SelectedPiece.Piece);
         }
 
         public int NumberOfPhoneNumbers { get; }

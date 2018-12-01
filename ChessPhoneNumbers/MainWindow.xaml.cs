@@ -22,12 +22,14 @@ namespace ChessPhoneNumbers
         {
             InitializeComponent();
 
-            DataContext = new MainWindowViewModel();
+           DataContext = ViewModel = new MainWindowViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            ViewModel.Find();
         }
+
+        private MainWindowViewModel ViewModel { get; set; }
     }
 }
