@@ -54,6 +54,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Graphs\Edge.cs" />
+    <Compile Include="Graphs\EdgeType.cs" />
     <Compile Include="Utility\ResourceReader.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -66,7 +68,7 @@
     <Compile Include="Domain\Key.cs" />
     <Compile Include="Domain\Keypad.cs" />
     <Compile Include="Graphs\Graph.cs" />
-    <Compile Include="Graphs\GraphReader.cs" />
+    <Compile Include="PhoneNumbers\KeypadGraphReader.cs" />
     <Compile Include="Graphs\Vertex.cs" />
     <Compile Include="Paths\Path.cs" />
     <Compile Include="Paths\Pathfinder.cs" />
@@ -104,10 +106,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="graph.txt" />
+    <None Include="Data\graph.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="keypad.txt" />
+    <EmbeddedResource Include="Data\keypad.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Readme.txt" />

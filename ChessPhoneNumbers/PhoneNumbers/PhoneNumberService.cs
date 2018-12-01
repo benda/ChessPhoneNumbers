@@ -14,7 +14,7 @@ namespace ChessPhoneNumbers.PhoneNumbers
 
         public int FindAllPhoneNumbers(Piece piece)
         {
-            Pathfinder pf = new Pathfinder(new Keypad(new GraphReader().Read("graph.txt")));
+            Pathfinder pf = new Pathfinder(new KeypadGraphReader().Read("ChessPhoneNumbers.Data.keypad.txt"));
 
             return (from p in pf.FindAllPaths(piece, MaximumNumberOfDigitsInPhoneNumber) where IsValidPhoneNumber(p) select p).Count();
         }
