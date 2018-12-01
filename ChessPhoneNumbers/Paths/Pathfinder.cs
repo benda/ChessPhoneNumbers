@@ -19,6 +19,10 @@ namespace ChessPhoneNumbers.Domain
         {
             List<Path> paths = new List<Path>();
 
+            foreach(var nextPosition in piece.GetNextPotentialMoves())
+            {
+
+            }
 
 
             return paths;

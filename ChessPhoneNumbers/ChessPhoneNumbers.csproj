@@ -54,9 +54,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Domain\Pieces.cs" />
+    <Compile Include="Domain\Queen.cs" />
+    <Compile Include="Domain\King.cs" />
+    <Compile Include="Domain\Bishop.cs" />
+    <Compile Include="Domain\Knight.cs" />
+    <Compile Include="Domain\Rook.cs" />
+    <Compile Include="Domain\Pawn.cs" />
+    <Compile Include="Utility\Enum\AbstractTypeSafeEnum.cs" />
+    <Compile Include="Utility\Enum\AbstractTypeSafeEnumManager.cs" />
     <Compile Include="Graphs\Edge.cs" />
     <Compile Include="Graphs\EdgeType.cs" />
+    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Utility\ResourceReader.cs" />
+    <Compile Include="Utility\ComponentModel\ChangeStateMonitor.cs" />
+    <Compile Include="Utility\ComponentModel\NotifyPropertyChangedEntity.cs" />
+    <Compile Include="Utility\ComponentModel\Property.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -114,5 +127,6 @@
   <ItemGroup>
     <Resource Include="Readme.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

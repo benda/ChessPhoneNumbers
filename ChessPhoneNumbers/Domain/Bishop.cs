@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace ChessPhoneNumbers.Domain
 {
-    abstract class Piece
+    class Bishop : Piece
     {
-        public Vertex<Key> Position { get; }
+        public override IEnumerable<Vertex<Key>> GetNextPotentialMoves()
+        {
+            throw new NotImplementedException();
+        }
 
-        public abstract IEnumerable<Vertex<Key>> GetNextPotentialMoves();
     }
 }

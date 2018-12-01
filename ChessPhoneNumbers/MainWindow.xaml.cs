@@ -21,7 +21,13 @@ namespace ChessPhoneNumbers
         public MainWindow()
         {
             InitializeComponent();
-            new PhoneNumberService().FindAllPhoneNumbers(new Domain.Piece());
+
+            DataContext = new MainWindowViewModel();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
