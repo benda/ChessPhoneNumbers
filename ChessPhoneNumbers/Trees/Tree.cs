@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChessPhoneNumbers.Trees
 {
-    public class Tree<T>
+     class Tree<T>
     {
         public TreeNode<T> Root { get; }
         private List<TreeNode<T>> _allLeafNodes;

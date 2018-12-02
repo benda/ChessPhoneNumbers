@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ChessPhoneNumbers.Domain
 {
-   public  class Key
+   class Key
     {
         public int? Digit { get; }
         public char? Character { get; }

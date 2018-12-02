@@ -11,13 +11,15 @@ namespace ChessPhoneNumbers.ViewModel
     /// <summary>
     /// Generics in XAML don't work so well so we wrap 
     /// </summary>
-    public class TreeNodeViewModel
+    class TreeNodeViewModel
     {
-       // public ChessPhoneNumbers.Trees.TreeNode<Key> Node { get; }
+        public ChessPhoneNumbers.Trees.TreeNode<Key> Node { get; }
+
+        public TreeNodeViewModel() { }
 
         public TreeNodeViewModel(TreeNode<Key> node)
         {
-            //Node = node;
+            Node = node;
         }
     }
 }

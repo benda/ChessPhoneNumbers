@@ -7,7 +7,7 @@ using ChessPhoneNumbers.Domain;
 
 namespace ChessPhoneNumbers.Trees
 {
-    public class TreeNode<T>
+    class TreeNode<T>
     {
         public T Item { get; }
 

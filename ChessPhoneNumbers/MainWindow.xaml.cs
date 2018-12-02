@@ -1,4 +1,5 @@
 ﻿using ChessPhoneNumbers.PhoneNumbers;
+using ChessPhoneNumbers.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

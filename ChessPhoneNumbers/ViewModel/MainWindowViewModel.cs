@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChessPhoneNumbers
+namespace ChessPhoneNumbers.ViewModel
 {
     class MainWindowViewModel : NotifyPropertyChangedEntity
     {

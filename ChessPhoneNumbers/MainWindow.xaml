@@ -30,7 +30,9 @@
         <TextBlock Grid.Row="1" Text="{Binding NumberOfPhoneNumbers}" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="20"/>
         <TreeView Grid.Row="2" Margin="10" ItemsSource="{Binding Trees}">
             <TreeView.Resources>
-               
+                <HierarchicalDataTemplate DataType="{x:Type vm:TreeNodeViewModel}" ItemsSource="{Binding Node.Children}">
+                    <TextBlock Text="{Binding Path=Node.Item}" />
+                </HierarchicalDataTemplate>
             </TreeView.Resources>
         </TreeView>
     </Grid>
