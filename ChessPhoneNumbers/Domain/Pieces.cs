@@ -20,11 +20,9 @@ namespace ChessPhoneNumbers.Domain
 
         public Pieces(string name, Piece piece) : base(name)
         {
-            Name = name;
             Piece = piece;
         }
 
-        public string Name { get; }
         public Piece Piece { get; }
 
         public static IEnumerable<Pieces> GetValues()

@@ -9,9 +9,9 @@ namespace ChessPhoneNumbers.Domain
 {
     class Pawn : Piece
     {
-        public override IEnumerable<Vertex<Key>> GetNextPotentialMoves()
+        public override IEnumerable<Edge<Key>> GetNextPotentialMoves()
         {
-            return new List<Vertex<Key>>(); //we know pawn has no valid phone number so no need to implement
+            return new List<Edge<Key>>(); //we know pawn has no valid phone number so no need to implement
         }
     }
 }

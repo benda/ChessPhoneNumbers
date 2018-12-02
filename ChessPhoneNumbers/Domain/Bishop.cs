@@ -9,26 +9,62 @@ namespace ChessPhoneNumbers.Domain
 {
     class Bishop : Piece
     {
-        public override IEnumerable<Vertex<Key>> GetNextPotentialMoves()
+        public override IEnumerable<Edge<Key>> GetNextPotentialMoves()
         {
-            var moves = new List<Vertex<Key>>();
+            var moves = new List<Edge<Key>>();
+            Stack<Edge<Key>> edgesToCheck = new Stack<Edge<Key>>();
 
             foreach (var edge in Position.Edges)
             {
-                if (edge.EdgeType == EdgeType.Diagonal)
+                edgesToCheck.Push(edge);
+            }
+            Direction currentDirection = null;
+
+            while (edgesToCheck.Count > 0)
+            {
+                var edgeToCheck = edgesToCheck.Pop();
+
+                if(IsAcceptableEdge(edgeToCheck))
                 {
-                    if (edge.VertexA == Position)
+                    if(currentDirection == null)
                     {
-                        moves.Add(edge.VertexB);
+                        currentDirection = edgeToCheck.Direction;
                     }
-                    else
+                    moves.Add(edgeToCheck);
+                    
+                    foreach(var edge in edgeToCheck.Destination.Edges)
                     {
-                        moves.Add(edge.VertexA);
+                        if (edge.Direction == currentDirection && edge.Origin == edgeToCheck.Destination)
+                        {
+                            edgesToCheck.Push(edge);
+                        }
                     }
-                }              
+                }
             }
 
             return moves;
         }
-    }
+
+        private bool IsAcceptableEdge(Edge<Key> edge)
+        {
+            return edge.Direction.IsDiagonal;
+        }
+
+            /*
+                    private Vertex<Key> GetNext(Edge<Key> edge)
+                    {
+                        if (edge.Direction.IsDiagonal)
+                        {
+                            if (edge.VertexA == Position)
+                            {
+                                return edge.VertexB;
+                            }
+                            else
+                            {
+                                return edge.VertexA;
+                            }
+                        }
+                    }
+                    */
+        }
 }

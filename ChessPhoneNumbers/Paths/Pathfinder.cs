@@ -39,7 +39,7 @@ namespace ChessPhoneNumbers.Domain
 
             foreach (var nextPosition in piece.GetNextPotentialMoves())
             {
-                currentPath.Keys.Add(nextPosition.Item);
+                currentPath.Keys.Add(nextPosition.Destination.Item);
                 FindPath(piece, maximumNumberOfKeysInPath, currentPath);
             }
         }

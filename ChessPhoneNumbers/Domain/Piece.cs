@@ -11,6 +11,6 @@ namespace ChessPhoneNumbers.Domain
     {
         public Vertex<Key> Position { get; set; }
 
-        public abstract IEnumerable<Vertex<Key>> GetNextPotentialMoves();
+        public abstract IEnumerable<Edge<Key>> GetNextPotentialMoves();
     }
 }

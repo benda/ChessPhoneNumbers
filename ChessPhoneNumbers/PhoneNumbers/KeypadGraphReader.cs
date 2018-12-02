@@ -17,8 +17,10 @@ namespace ChessPhoneNumbers.Graphs
 
             foreach(string edgeString in new ResourceReader().Get(resourceName).Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
-                int vertexAKey = int.Parse(edgeString[0].ToString());
-                int vertexBKey = int.Parse(edgeString[4].ToString());
+                string[] edgeInfo = edgeString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                int vertexAKey = int.Parse(edgeInfo[0].ToString());
+                int vertexBKey = int.Parse(edgeInfo[2].ToString());
 
                 if (!vertices.ContainsKey(vertexAKey))
                 {
@@ -33,10 +35,10 @@ namespace ChessPhoneNumbers.Graphs
                 var vertexA = vertices[vertexAKey];
                 var vertexB = vertices[vertexBKey];
 
-                Edge<Key> edge = new Edge<Key>(vertexA, vertexB, ToEdgeType(edgeString[2]));
+                Edge<Key> edge = new Edge<Key>(vertexA, vertexB, Direction.FromString(edgeInfo[1]));
 
-                vertexA.Edges.AddLast(edge);
-                vertexB.Edges.AddLast(edge);
+                vertexA.Edges.Add(edge);
+                vertexB.Edges.Add(edge);
             }
 
             foreach(int vertex in vertices.Keys)
@@ -45,15 +47,6 @@ namespace ChessPhoneNumbers.Graphs
             }
 
             return new Keypad(graph); 
-        }
-
-        private EdgeType ToEdgeType(char v)
-        {
-            if (v == 'H') return EdgeType.Horizontal;
-            if (v == 'V') return EdgeType.Vertical;
-            if (v == 'D') return EdgeType.Diagonal;
-
-            throw new InvalidOperationException($"Unknown edge type: {v}");
         }
     }
 }

@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace ChessPhoneNumbers.Graphs
 {
-    [DebuggerDisplay("{VertexA} {EdgeType} {VertexB}")]
+    [DebuggerDisplay("{Origin} {Direction} {Destination}")]
     class Edge<T>
     {
-        public Vertex<T> VertexA { get; }
-        public Vertex<T> VertexB { get; }
-        public EdgeType EdgeType { get; }
+        public Vertex<T> Origin { get; }
+        public Vertex<T> Destination { get; }
+        public Direction Direction { get; }
         public int Cost { get; } = 1;
 
-        public Edge(Vertex<T> vertexA, Vertex<T> vertexB, EdgeType edgeType)
+        public Edge(Vertex<T> vertexA, Vertex<T> vertexB, Direction direction)
         {
-            VertexA = vertexA;
-            VertexB = vertexB;
-            EdgeType = edgeType;
+            Origin = vertexA;
+            Destination = vertexB;
+            Direction = direction;
         }
     }
 }

@@ -19,7 +19,7 @@
         <ComboBox Margin="10" MinWidth="100" ItemsSource="{Binding AllPieces}" SelectedItem="{Binding SelectedPiece}" HorizontalAlignment="Center" VerticalAlignment="Center">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
+                    <TextBlock Text="{Binding DisplayName}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
