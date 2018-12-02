@@ -11,16 +11,18 @@ namespace ChessPhoneNumbers.Trees
     {
         public T Item { get; }
 
-        public TreeNode(T item)
+        public TreeNode(T item, TreeNode<T> parent)
         {
             Item = item;
+            Parent = parent;
         }
 
         public HashSet<TreeNode<T>> Children { get; } = new HashSet<TreeNode<T>>();
+        public TreeNode<T> Parent { get; }
 
-        internal TreeNode<T> AddChild(T item)
+        public TreeNode<T> AddChild(T item)
         {
-            TreeNode<T> child = new TreeNode<T>(item);
+            TreeNode<T> child = new TreeNode<T>(item, this);
             Children.Add(child);
             return child;
         }

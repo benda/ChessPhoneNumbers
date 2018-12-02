@@ -8,7 +8,7 @@ namespace ChessPhoneNumbers.Domain
 {
     class Path
     {
-        public List<Key> Keys { get; } = new List<Key>();
+        public LinkedList<Key> Keys { get; } = new LinkedList<Key>();
 
         public Path()
         {

@@ -21,7 +21,7 @@ namespace ChessPhoneNumbers.PhoneNumbers
 
         public bool IsValidPhoneNumber(Path path)
         {
-            return path.Keys.Count == MaximumNumberOfDigitsInPhoneNumber && !path.Keys[0].IsValue(0) && !path.Keys[0].IsValue(1) && !path.Keys.Any(k => k.IsCharacter);
+            return path.Keys.Count == MaximumNumberOfDigitsInPhoneNumber && !path.Keys.First().IsValue(0) && !path.Keys.First().IsValue(1) && !path.Keys.Any(k => k.IsCharacter);
         }
     }
 }

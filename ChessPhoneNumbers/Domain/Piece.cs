@@ -10,17 +10,11 @@ namespace ChessPhoneNumbers.Domain
     abstract class Piece
     {
         public Vertex<Key> Position { get; private set; }
-        public Vertex<Key> StartPosition { get; private set; }
 
         public abstract IEnumerable<Edge<Key>> GetPossibleMoves();
 
         public void MoveTo(Vertex<Key> newPosition)
         {
-            if(Position == null)
-            {
-                StartPosition = newPosition;
-            }
-
             Position = newPosition;
         }
     }

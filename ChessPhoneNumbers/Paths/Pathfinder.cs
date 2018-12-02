@@ -27,18 +27,35 @@ namespace ChessPhoneNumbers.Domain
 
                     piece.MoveTo(startPosition);
 
-                    paths.AddRange(FindAllPathsForPosition(piece, maximumNumberOfKeysInPath));
+                    BuildPathsTree(piece, maximumNumberOfKeysInPath, _uniquePaths[startPosition.Item].Root, 1);
+
+                    paths.AddRange(BuildAllPathsForPosition(piece, maximumNumberOfKeysInPath, startPosition.Item));
                 }
             }
 
             return paths;
         }
 
-        private List<Path> FindAllPathsForPosition(Piece piece, int maximumNumberOfKeysInPath)
+        private List<Path> BuildAllPathsForPosition(Piece piece, int maximumNumberOfKeysInPath, Key startPosition)
         {
-            BuildPathsTree(piece, maximumNumberOfKeysInPath, _uniquePaths[piece.StartPosition.Item].Root, 1);
+            var pathsTree = _uniquePaths[startPosition];
+            List<Path> allPaths = new List<Path>();
 
-            return new List<Path>();
+            foreach(var node in pathsTree.AllLeafNodes())
+            {
+                Path path = new Path();
+                var current = node;
+                while(current.Parent != null)
+                {
+                    path.Keys.AddFirst(current.Item);
+                    current = current.Parent;
+                }
+
+                path.Keys.AddFirst(startPosition);
+                allPaths.Add(path);
+            }
+
+            return allPaths;            
         }
 
         private void BuildPathsTree(Piece piece, int maximumNumberOfKeysInPath, TreeNode<Key> currentPosition, int currentDepth)
