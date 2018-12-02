@@ -18,6 +18,8 @@ namespace ChessPhoneNumbers.ViewModel
         private PathFinderResult _result;
         private IEnumerable<TreeNodeViewModel> _trees;
         private List<string> _phoneNumbers;
+        private bool _isFinding = false;
+        private bool _showFindingProgresIndicator = false;
 
         public MainWindowViewModel()
         {
@@ -27,15 +29,31 @@ namespace ChessPhoneNumbers.ViewModel
 
         public void Find()
         {
+            if (SelectedPiece.IsLongRunning)
+            {
+                ShowFindingProgressIndicator = true;
+                ShowResults = false;
+            }
+            else
+            {
+                ShowFindingProgressIndicator = false;
+                ShowResults = true;
+            }
+
+            Task.Factory.StartNew(DoFind);
+        }
+
+        private void DoFind()
+        {
             _result = new PhoneNumberService().FindAllPhoneNumbers(SelectedPiece.Piece);
             NumberOfPhoneNumbers = _result.AllPaths.Count;
             Trees = (from t in _result.PathTrees select new TreeNodeViewModel(t.Root));
             List<string> phoneNumbers = new List<string>();
 
-            foreach(Path p in _result.AllPaths)
+            foreach (Path p in _result.AllPaths)
             {
                 StringBuilder phoneNumber = new StringBuilder();
-                foreach(Key k in p.Keys)
+                foreach (Key k in p.Keys)
                 {
                     phoneNumber.Append(k.Digit);
                 }
@@ -44,6 +62,35 @@ namespace ChessPhoneNumbers.ViewModel
 
             phoneNumbers.Sort();
             PhoneNumbers = phoneNumbers;
+
+            if (SelectedPiece.IsLongRunning)
+            {
+                ShowFindingProgressIndicator = false;
+                ShowResults = true;
+            }
+        }
+
+        public bool ShowFindingProgressIndicator
+        {
+            get { return _showFindingProgresIndicator; }
+
+            set
+            {
+                _showFindingProgresIndicator = value;
+                OnPropertyChanged(nameof(ShowFindingProgressIndicator));
+            }
+        }
+
+
+        public bool ShowResults
+        {
+            get { return _isFinding; }
+
+            set
+            {
+                _isFinding = value;
+                OnPropertyChanged(nameof(ShowResults));
+            }
         }
 
         public int? NumberOfPhoneNumbers

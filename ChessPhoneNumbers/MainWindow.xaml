@@ -5,23 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:ChessPhoneNumbers.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1000" Background="LightGray">
+        Title="MainWindow" Height="800" Width="1000" Background="Gray">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <ComboBox Margin="10" Width="80" ItemsSource="{Binding AllPieces}" SelectedItem="{Binding SelectedPiece}" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -35,18 +30,38 @@
             <Button Margin="10" Click="Button_Click" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="100" FontSize="15">Find</Button>
         </StackPanel>
 
-        <TextBlock Grid.Row="1" Text="{Binding NumberOfPhoneNumbers,StringFormat=Number of valid phone numbers: {0}}" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="20"/>
+        <Grid Grid.Row="1" Visibility="{Binding ShowFindingProgressIndicator,Converter={StaticResource BooleanToVisibilityConverter}}" Margin="50">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Finding..." HorizontalAlignment="Center" Margin="5"/>
+            <ProgressBar Grid.Row="1"  Width="300" Height="50" IsIndeterminate="True" HorizontalAlignment="Center"/>
+        </Grid>
 
-        <TextBlock Grid.Row="2" Margin="10" FontSize="20" Text="Phone Number Viewer"/>
-        <ListBox Grid.Row="3" Margin="10" ItemsSource="{Binding PhoneNumbers}" Height="300" Width="200" HorizontalAlignment="Left"/>
+        <Grid Grid.Row="1" Visibility="{Binding ShowResults,Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="4" Margin="10" FontSize="20" Text="Path Viewer" HorizontalAlignment="Left"/>
-        <TreeView Grid.Row="5" Margin="10" ItemsSource="{Binding Trees}">
-            <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type vm:TreeNodeViewModel}" ItemsSource="{Binding Children}">
-                    <TextBlock Text="{Binding Path=Item}" />
-                </HierarchicalDataTemplate>
-            </TreeView.Resources>
-        </TreeView>
+            <TextBlock Grid.Row="0" Text="{Binding NumberOfPhoneNumbers,StringFormat=Number of valid phone numbers: {0}}" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="20" />
+
+            <TextBlock Grid.Row="1" Margin="10" FontSize="20" Text="Phone Number Viewer"/>
+            <ListBox Grid.Row="2" Margin="10" ItemsSource="{Binding PhoneNumbers}" Height="300" Width="200" HorizontalAlignment="Left"/>
+
+            <TextBlock Grid.Row="3" Margin="10" FontSize="20" Text="Path Viewer" HorizontalAlignment="Left"/>
+            <TreeView Grid.Row="4" Margin="10" ItemsSource="{Binding Trees}">
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type vm:TreeNodeViewModel}" ItemsSource="{Binding Children}">
+                        <TextBlock Text="{Binding Path=Item}" />
+                    </HierarchicalDataTemplate>
+                </TreeView.Resources>
+            </TreeView>
+
+        </Grid>
     </Grid>
 </Window>
