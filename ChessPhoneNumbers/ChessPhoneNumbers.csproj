@@ -63,6 +63,8 @@
     <Compile Include="Domain\Rook.cs" />
     <Compile Include="Domain\Pawn.cs" />
     <Compile Include="Graphs\Direction.cs" />
+    <Compile Include="Trees\Tree.cs" />
+    <Compile Include="Trees\TreeNode.cs" />
     <Compile Include="Utility\Enum\AbstractTypeSafeEnum.cs" />
     <Compile Include="Utility\Enum\AbstractTypeSafeEnumManager.cs" />
     <Compile Include="Graphs\Edge.cs" />

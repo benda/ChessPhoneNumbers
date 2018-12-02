@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ChessPhoneNumbers.Trees;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ChessPhoneNumbers.Domain
@@ -6,6 +7,8 @@ namespace ChessPhoneNumbers.Domain
     class Pathfinder
     {
         private Keypad _keypad;
+        //private HashSet<Path> _uniquePaths;
+        private Dictionary<Key, Tree<Key>> _uniquePaths = new Dictionary<Key, Tree<Key>>();
 
         public Pathfinder(Keypad keypad)
         {
@@ -18,8 +21,15 @@ namespace ChessPhoneNumbers.Domain
 
             foreach (var startPosition in _keypad.Graph.Vertices)
             {
-                piece.MoveTo(startPosition);
-                paths.AddRange(FindAllPathsForPosition(piece, maximumNumberOfKeysInPath));
+                if (!startPosition.Item.IsCharacter)
+                {
+                    var tree = new Tree<Key>(startPosition.Item);
+                    _uniquePaths.Add(tree.Root.Item, tree);
+
+                    piece.MoveTo(startPosition);
+
+                    paths.AddRange(FindAllPathsForPosition(piece, maximumNumberOfKeysInPath));
+                }
             }
 
             return paths;
@@ -33,7 +43,7 @@ namespace ChessPhoneNumbers.Domain
 
         private void FindPath(Piece piece, int maximumNumberOfKeysInPath, Path currentPath)
         {
-            if(currentPath.Keys.Count == 0)
+            if (currentPath.Keys.Count == 0)
             {
                 currentPath.Keys.Add(piece.Position.Item);
             }
@@ -44,7 +54,7 @@ namespace ChessPhoneNumbers.Domain
             }
 
             var moves = piece.GetNextPotentialMoves();
-            if(!moves.Any())
+            if (!moves.Any())
             {
                 return;
             }
