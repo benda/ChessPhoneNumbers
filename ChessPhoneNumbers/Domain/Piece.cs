@@ -15,32 +15,37 @@ namespace ChessPhoneNumbers.Domain
         {
             var moves = new List<Move>();
 
-            Stack<Edge<Key>> edgesToCheck = new Stack<Edge<Key>>();
+            Stack<Move> edgesToCheck = new Stack<Move>();
 
             foreach (var edge in Position.Edges)
             {
-                edgesToCheck.Push(edge);
+                var move = new Move(edge.Destination, 1, Position);
+                move.Path.Add(edge);
+                edgesToCheck.Push(move);
             }
 
             while (edgesToCheck.Count > 0)
             {
-                var edgeToCheck = edgesToCheck.Pop();
+                var move = edgesToCheck.Pop();
+
+                Edge<Key> edgeToCheck = move.Path[move.Path.Count - 1];
 
                 if (IsAcceptableEdge(edgeToCheck))
-                {
-                    var move = new Move(edgeToCheck.Destination, 1, Position);
-                    move.Path.Add(edgeToCheck);
+                {                 
                     moves.Add(move);
 
                     if (!MaximumCostPerMove.HasValue || move.Cost < MaximumCostPerMove)
                     {
-                        move.Cost += edgeToCheck.Cost;
-
                         foreach (var edge in edgeToCheck.Destination.Edges)
                         {
                             if (edge.Direction == edgeToCheck.Direction && edge.Origin == edgeToCheck.Destination)
                             {
-                                edgesToCheck.Push(edge);
+                                var multipleCostMove = new Move(edgeToCheck.Destination, move.Cost, Position);
+                                multipleCostMove.Path.AddRange(move.Path);
+                                multipleCostMove.Path.Add(edgeToCheck);
+                                multipleCostMove.Cost += edgeToCheck.Cost;
+
+                                edgesToCheck.Push(multipleCostMove);
                             }
                         }
                     }

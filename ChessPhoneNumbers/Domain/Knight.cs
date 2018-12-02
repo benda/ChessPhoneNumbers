@@ -18,7 +18,59 @@ namespace ChessPhoneNumbers.Domain
 
         protected override bool IsAcceptableMove(Move m)
         {
-            return true;
+            if(m.Cost != 3)
+            {
+                return false;              
+            }
+
+            int nCount = 0;
+            int sCount = 0;
+            int eCount = 0;
+            int wCount = 0;
+
+            foreach(var edge in m.Path)
+            {
+                if(edge.Direction == Direction.North)
+                {
+                    nCount++;
+                }
+
+                if (edge.Direction == Direction.South)
+                {
+                    sCount++;
+                }
+
+                if (edge.Direction == Direction.East)
+                {
+                    eCount++;
+                }
+                if (edge.Direction == Direction.West)
+                {
+                    wCount++;
+                }
+            }
+
+            if ((nCount == 2 && eCount == 1) || (nCount == 2 && wCount == 1))
+            {
+                return true;
+            }
+
+            if ((sCount == 2 && eCount == 1) || (sCount == 2 && wCount == 1))
+            {
+                return true;
+            }
+
+            if ((eCount == 2 && nCount == 1) || (eCount == 2 && sCount == 1))
+            {
+                return true;
+            }
+
+            if ((wCount == 2 && nCount == 1) || (wCount == 2 && sCount == 1))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
