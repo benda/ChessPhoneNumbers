@@ -9,7 +9,7 @@ namespace ChessPhoneNumbers.Domain
 {
     class King : Piece
     {
-        public override IEnumerable<Edge<Key>> GetNextPotentialMoves()
+        public override IEnumerable<Edge<Key>> GetPossibleMoves()
         {
             throw new NotImplementedException();
         }

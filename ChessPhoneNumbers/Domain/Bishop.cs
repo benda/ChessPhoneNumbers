@@ -9,7 +9,7 @@ namespace ChessPhoneNumbers.Domain
 {
     class Bishop : Piece
     {
-        public override IEnumerable<Edge<Key>> GetNextPotentialMoves()
+        public override IEnumerable<Edge<Key>> GetPossibleMoves()
         {
             var moves = new List<Edge<Key>>();
             Stack<Edge<Key>> edgesToCheck = new Stack<Edge<Key>>();

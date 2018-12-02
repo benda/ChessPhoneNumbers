@@ -7,7 +7,6 @@ namespace ChessPhoneNumbers.Domain
     class Pathfinder
     {
         private Keypad _keypad;
-        //private HashSet<Path> _uniquePaths;
         private Dictionary<Key, Tree<Key>> _uniquePaths = new Dictionary<Key, Tree<Key>>();
 
         public Pathfinder(Keypad keypad)
@@ -49,32 +48,13 @@ namespace ChessPhoneNumbers.Domain
                 return;
             }
 
-            var moves = piece.GetNextPotentialMoves();
+            var moves = piece.GetPossibleMoves();
             foreach(var move in moves)
             {
                 piece.MoveTo(move.Destination);
                 var destinationChildTreeNode = currentPosition.AddChild(move.Destination.Item);
                 BuildPathsTree(piece, maximumNumberOfKeysInPath, destinationChildTreeNode, currentDepth + 1);
             }
-/*
-            if (!moves.Any())
-            {
-                return;
-            }
-            else
-            {
-                var move = moves.First();
-                currentPath.Keys.Add(move.Destination.Item);
-                piece.MoveTo(move.Destination);
-                FindPath(piece, maximumNumberOfKeysInPath, currentPath);
-            }*/
-
-            /*
-            foreach (var nextPosition in )
-            {
-                currentPath.Keys.Add(nextPosition.Destination.Item);
-                FindPath(piece, maximumNumberOfKeysInPath, currentPath);
-            }*/
         }
     }
 }

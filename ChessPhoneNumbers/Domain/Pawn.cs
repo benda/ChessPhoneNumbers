@@ -9,7 +9,7 @@ namespace ChessPhoneNumbers.Domain
 {
     class Pawn : Piece
     {
-        public override IEnumerable<Edge<Key>> GetNextPotentialMoves()
+        public override IEnumerable<Edge<Key>> GetPossibleMoves()
         {
             return new List<Edge<Key>>(); //we know pawn has no valid phone number so no need to implement
         }
