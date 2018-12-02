@@ -11,7 +11,7 @@ namespace ChessPhoneNumbers.Domain
     {
         public Vertex<Key> Origin { get; }
         public Vertex<Key> Destination { get; }
-        public int Cost { get; set; }
+        public int Cost { get; }
         public List<Edge<Key>> Path { get; }
 
         public Move(Vertex<Key> destination, int cost, Vertex<Key> origin)

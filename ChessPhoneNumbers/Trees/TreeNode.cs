@@ -31,5 +31,17 @@ namespace ChessPhoneNumbers.Trees
         {
             return $"{Item}";
         }
+
+        public override bool Equals(object obj)
+        {
+            var node = obj as TreeNode<T>;
+            return node != null &&
+                   EqualityComparer<T>.Default.Equals(Item, node.Item);
+        }
+
+        public override int GetHashCode()
+        {
+            return -979861770 + EqualityComparer<T>.Default.GetHashCode(Item);
+        }
     }
 }

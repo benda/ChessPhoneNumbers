@@ -9,7 +9,7 @@
 	//pawns can only move 1 direction so we know pawn has no valid phone number so no need to implement
         
 		Pawn: 0
-		Knight:
+		Knight: 952
 		Bishop: 2341
 		Rook: 49326
 		Queen: 751503

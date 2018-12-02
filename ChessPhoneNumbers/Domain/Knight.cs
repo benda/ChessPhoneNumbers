@@ -37,21 +37,21 @@ namespace ChessPhoneNumbers.Domain
 
                 if (IsAcceptableEdge(edgeToCheck))
                 {
-                    moves.Add(move);
+                    if (move.Cost == MaximumCostPerMove)
+                    {
+                        moves.Add(move);
+                        continue;
+                    }
 
-                    if (!MaximumCostPerMove.HasValue || move.Cost < MaximumCostPerMove)
+                    if (move.Cost < MaximumCostPerMove)
                     {
                         foreach (var edge in edgeToCheck.Destination.Edges)
                         {
-                            if (edge.Direction == edgeToCheck.Direction && edge.Origin == edgeToCheck.Destination)
-                            {
-                                var multipleCostMove = new Move(edgeToCheck.Destination, move.Cost, Position);
-                                multipleCostMove.Path.AddRange(move.Path);
-                                multipleCostMove.Path.Add(edgeToCheck);
-                                multipleCostMove.Cost += edgeToCheck.Cost;
+                            var move2 = new Move(edge.Destination, move.Cost + edge.Cost, Position);
+                            move2.Path.AddRange(move.Path);
+                            move2.Path.Add(edge);
 
-                                edgesToCheck.Push(multipleCostMove);
-                            }
+                            edgesToCheck.Push(move2);
                         }
                     }
                 }
@@ -62,19 +62,14 @@ namespace ChessPhoneNumbers.Domain
 
         protected bool IsAcceptableMove(Move m)
         {
-            if(m.Cost != 3)
-            {
-                return false;              
-            }
-
             int nCount = 0;
             int sCount = 0;
             int eCount = 0;
             int wCount = 0;
 
-            foreach(var edge in m.Path)
+            foreach (var edge in m.Path)
             {
-                if(edge.Direction == Direction.North)
+                if (edge.Direction == Direction.North)
                 {
                     nCount++;
                 }
