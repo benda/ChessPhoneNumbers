@@ -11,9 +11,14 @@ namespace ChessPhoneNumbers.Domain
     {
         protected override bool IsAcceptableEdge(Edge<Key> edge)
         {
-            throw new NotImplementedException();
+            return edge.Direction == Direction.North || edge.Direction == Direction.South || edge.Direction == Direction.East || edge.Direction == Direction.West;
         }
 
-        protected override int? MaximumCostPerMove => null;
+        protected override int? MaximumCostPerMove => 3;
+
+        protected override bool IsAcceptableMove(Move m)
+        {
+            return true;
+        }
     }
 }

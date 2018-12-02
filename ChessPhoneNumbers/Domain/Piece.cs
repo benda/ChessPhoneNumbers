@@ -28,7 +28,8 @@ namespace ChessPhoneNumbers.Domain
 
                 if (IsAcceptableEdge(edgeToCheck))
                 {
-                    var move = new Move(edgeToCheck.Destination, edgeToCheck.Direction, 1);
+                    var move = new Move(edgeToCheck.Destination, 1, Position);
+                    move.Path.Add(edgeToCheck);
                     moves.Add(move);
 
                     if (!MaximumCostPerMove.HasValue || move.Cost < MaximumCostPerMove)
@@ -46,7 +47,12 @@ namespace ChessPhoneNumbers.Domain
                 }
             }
 
-            return moves;
+            return (from m in moves where IsAcceptableMove(m) select m);
+        }
+
+        protected virtual bool IsAcceptableMove(Move m)
+        {
+            return true;
         }
 
         protected abstract bool IsAcceptableEdge(Edge<Key> edge);

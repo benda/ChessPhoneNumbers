@@ -9,14 +9,17 @@ namespace ChessPhoneNumbers.Domain
 {
     class Move
     {
+        public Vertex<Key> Origin { get; }
         public Vertex<Key> Destination { get; }
-        public Direction Direction { get; }
         public int Cost { get; set; }
+        public List<Edge<Key>> Path { get; }
 
-        public Move(Vertex<Key> destination, Direction direction, int cost)
+        public Move(Vertex<Key> destination, int cost, Vertex<Key> origin)
         {
             Destination = destination;
-            Direction = direction;
+            Cost = cost;
+            Origin = origin;
+            Path = new List<Edge<Key>>();
         }
     }
 }
