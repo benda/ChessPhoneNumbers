@@ -15,7 +15,7 @@ namespace ChessPhoneNumbers.PhoneNumbers
 
         public bool IsValid(TreeNode<Key> currentPosition, int currentDepth)
         {
-            if(currentDepth > MaximumNumberOfDigitsInPhoneNumber)
+            if(currentDepth == MaximumNumberOfDigitsInPhoneNumber)
             {
                 return false;
             }

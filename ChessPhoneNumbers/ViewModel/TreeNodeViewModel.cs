@@ -13,13 +13,24 @@ namespace ChessPhoneNumbers.ViewModel
     /// </summary>
     class TreeNodeViewModel
     {
-        public ChessPhoneNumbers.Trees.TreeNode<Key> Node { get; }
+        public List<TreeNodeViewModel> Children { get; } = new List<TreeNodeViewModel>();
+        public Key Item { get; private set; }
 
         public TreeNodeViewModel() { }
 
         public TreeNodeViewModel(TreeNode<Key> node)
         {
-            Node = node;
+            BuildTree(node);
+        }
+
+        private void BuildTree(TreeNode<Key> node)
+        {
+            Item = node.Item;
+            foreach(var child in node.Children)
+            {
+                var childVm = new TreeNodeViewModel(child);
+                Children.Add(childVm);
+            }
         }
     }
 }
