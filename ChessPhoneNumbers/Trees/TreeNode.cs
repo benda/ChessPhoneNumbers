@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ChessPhoneNumbers.Domain;
 
 namespace ChessPhoneNumbers.Trees
 {
@@ -15,6 +16,18 @@ namespace ChessPhoneNumbers.Trees
             Item = item;
         }
 
-        public List<T> Children { get; } = new List<T>();
+        public HashSet<TreeNode<T>> Children { get; } = new HashSet<TreeNode<T>>();
+
+        internal TreeNode<T> AddChild(T item)
+        {
+            TreeNode<T> child = new TreeNode<T>(item);
+            Children.Add(child);
+            return child;
+        }
+
+        public override string ToString()
+        {
+            return $"{Item}";
+        }
     }
 }

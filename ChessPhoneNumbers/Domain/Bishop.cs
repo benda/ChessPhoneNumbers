@@ -18,23 +18,18 @@ namespace ChessPhoneNumbers.Domain
             {
                 edgesToCheck.Push(edge);
             }
-            Direction currentDirection = null;
 
             while (edgesToCheck.Count > 0)
             {
                 var edgeToCheck = edgesToCheck.Pop();
 
-                if(IsAcceptableEdge(edgeToCheck))
+                if (IsAcceptableEdge(edgeToCheck))
                 {
-                    if(currentDirection == null)
-                    {
-                        currentDirection = edgeToCheck.Direction;
-                    }
                     moves.Add(edgeToCheck);
-                    
-                    foreach(var edge in edgeToCheck.Destination.Edges)
+
+                    foreach (var edge in edgeToCheck.Destination.Edges)
                     {
-                        if (edge.Direction == currentDirection && edge.Origin == edgeToCheck.Destination)
+                        if (edge.Direction == edgeToCheck.Direction && edge.Origin == edgeToCheck.Destination)
                         {
                             edgesToCheck.Push(edge);
                         }
@@ -49,22 +44,5 @@ namespace ChessPhoneNumbers.Domain
         {
             return edge.Direction.IsDiagonal;
         }
-
-            /*
-                    private Vertex<Key> GetNext(Edge<Key> edge)
-                    {
-                        if (edge.Direction.IsDiagonal)
-                        {
-                            if (edge.VertexA == Position)
-                            {
-                                return edge.VertexB;
-                            }
-                            else
-                            {
-                                return edge.VertexA;
-                            }
-                        }
-                    }
-                    */
-        }
+    }
 }

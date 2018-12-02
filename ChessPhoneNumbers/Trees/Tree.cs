@@ -14,6 +14,5 @@ namespace ChessPhoneNumbers.Trees
         {
             Root = new TreeNode<T>(root);
         }
-
     }
 }

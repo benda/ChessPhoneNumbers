@@ -37,23 +37,26 @@ namespace ChessPhoneNumbers.Domain
 
         private List<Path> FindAllPathsForPosition(Piece piece, int maximumNumberOfKeysInPath)
         {
-            FindPath(piece, maximumNumberOfKeysInPath, new Path());
+            BuildPathsTree(piece, maximumNumberOfKeysInPath, _uniquePaths[piece.StartPosition.Item].Root, 1);
+
             return new List<Path>();
         }
 
-        private void FindPath(Piece piece, int maximumNumberOfKeysInPath, Path currentPath)
+        private void BuildPathsTree(Piece piece, int maximumNumberOfKeysInPath, TreeNode<Key> currentPosition, int currentDepth)
         {
-            if (currentPath.Keys.Count == 0)
-            {
-                currentPath.Keys.Add(piece.Position.Item);
-            }
-
-            if (currentPath.Keys.Count == maximumNumberOfKeysInPath)
+            if(currentDepth == maximumNumberOfKeysInPath)
             {
                 return;
             }
 
             var moves = piece.GetNextPotentialMoves();
+            foreach(var move in moves)
+            {
+                piece.MoveTo(move.Destination);
+                var destinationChildTreeNode = currentPosition.AddChild(move.Destination.Item);
+                BuildPathsTree(piece, maximumNumberOfKeysInPath, destinationChildTreeNode, currentDepth + 1);
+            }
+/*
             if (!moves.Any())
             {
                 return;
@@ -64,7 +67,7 @@ namespace ChessPhoneNumbers.Domain
                 currentPath.Keys.Add(move.Destination.Item);
                 piece.MoveTo(move.Destination);
                 FindPath(piece, maximumNumberOfKeysInPath, currentPath);
-            }
+            }*/
 
             /*
             foreach (var nextPosition in )
