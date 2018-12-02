@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:ChessPhoneNumbers.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1000">
+        Title="MainWindow" Height="800" Width="1000" Background="LightGray">
 
     <Grid>
         <Grid.ColumnDefinitions>
