@@ -1,8 +1,9 @@
-﻿using ChessPhoneNumbers.Trees;
+﻿using ChessPhoneNumbers.Domain;
+using ChessPhoneNumbers.Trees;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ChessPhoneNumbers.Domain
+namespace ChessPhoneNumbers.Paths
 {
     class Pathfinder
     {
@@ -14,7 +15,7 @@ namespace ChessPhoneNumbers.Domain
             _keypad = keypad;
         }
 
-        public List<Path> FindAllPaths(Piece piece, int maximumNumberOfKeysInPath)
+        public PathFinderResult FindAllPaths(Piece piece, IPathValidator validator)
         {
             List<Path> paths = new List<Path>();
 
@@ -27,16 +28,16 @@ namespace ChessPhoneNumbers.Domain
 
                     piece.MoveTo(startPosition);
 
-                    BuildPathsTree(piece, maximumNumberOfKeysInPath, _uniquePaths[startPosition.Item].Root, 1);
+                    BuildPathsTree(piece, validator, _uniquePaths[startPosition.Item].Root, 1);
 
-                    paths.AddRange(BuildAllPathsForPosition(piece, maximumNumberOfKeysInPath, startPosition.Item));
+                    paths.AddRange(BuildAllPathsForStartPosition(piece, startPosition.Item));
                 }
             }
 
-            return paths;
+            return new PathFinderResult(paths, _uniquePaths.Values);
         }
 
-        private List<Path> BuildAllPathsForPosition(Piece piece, int maximumNumberOfKeysInPath, Key startPosition)
+        private List<Path> BuildAllPathsForStartPosition(Piece piece, Key startPosition)
         {
             var pathsTree = _uniquePaths[startPosition];
             List<Path> allPaths = new List<Path>();
@@ -58,9 +59,9 @@ namespace ChessPhoneNumbers.Domain
             return allPaths;            
         }
 
-        private void BuildPathsTree(Piece piece, int maximumNumberOfKeysInPath, TreeNode<Key> currentPosition, int currentDepth)
+        private void BuildPathsTree(Piece piece, IPathValidator validator, TreeNode<Key> currentPosition, int currentDepth)
         {
-            if(currentDepth == maximumNumberOfKeysInPath)
+            if(!validator.IsValid(currentPosition,currentDepth))
             {
                 return;
             }
@@ -70,7 +71,7 @@ namespace ChessPhoneNumbers.Domain
             {
                 piece.MoveTo(move.Destination);
                 var destinationChildTreeNode = currentPosition.AddChild(move.Destination.Item);
-                BuildPathsTree(piece, maximumNumberOfKeysInPath, destinationChildTreeNode, currentDepth + 1);
+                BuildPathsTree(piece, validator, destinationChildTreeNode, currentDepth + 1);
             }
         }
     }

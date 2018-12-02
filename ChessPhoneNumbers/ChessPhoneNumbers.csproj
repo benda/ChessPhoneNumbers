@@ -63,16 +63,20 @@
     <Compile Include="Domain\Rook.cs" />
     <Compile Include="Domain\Pawn.cs" />
     <Compile Include="Graphs\Direction.cs" />
+    <Compile Include="Paths\IPathValidator.cs" />
+    <Compile Include="Paths\PathFinderResult.cs" />
+    <Compile Include="PhoneNumbers\PhoneNumberValidator.cs" />
     <Compile Include="Trees\Tree.cs" />
     <Compile Include="Trees\TreeNode.cs" />
     <Compile Include="Utility\Enum\AbstractTypeSafeEnum.cs" />
     <Compile Include="Utility\Enum\AbstractTypeSafeEnumManager.cs" />
     <Compile Include="Graphs\Edge.cs" />
-    <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="Utility\ResourceReader.cs" />
     <Compile Include="Utility\ComponentModel\ChangeStateMonitor.cs" />
     <Compile Include="Utility\ComponentModel\NotifyPropertyChangedEntity.cs" />
     <Compile Include="Utility\ComponentModel\Property.cs" />
+    <Compile Include="ViewModel\TreeNodeViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

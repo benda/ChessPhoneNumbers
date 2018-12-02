@@ -1,5 +1,6 @@
 ﻿using ChessPhoneNumbers.Domain;
 using ChessPhoneNumbers.Graphs;
+using ChessPhoneNumbers.Paths;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +11,11 @@ namespace ChessPhoneNumbers.PhoneNumbers
 {
     class PhoneNumberService
     {
-        private const int MaximumNumberOfDigitsInPhoneNumber = 7;
-
-        public int FindAllPhoneNumbers(Piece piece)
+        public PathFinderResult FindAllPhoneNumbers(Piece piece)
         {
             Pathfinder pf = new Pathfinder(new KeypadGraphReader().Read("ChessPhoneNumbers.Data.keypad.txt"));
 
-            return (from p in pf.FindAllPaths(piece, MaximumNumberOfDigitsInPhoneNumber) where IsValidPhoneNumber(p) select p).Count();
-        }
-
-        public bool IsValidPhoneNumber(Path path)
-        {
-            return path.Keys.Count == MaximumNumberOfDigitsInPhoneNumber && !path.Keys.First().IsValue(0) && !path.Keys.First().IsValue(1) && !path.Keys.Any(k => k.IsCharacter);
+            return pf.FindAllPaths(piece, new PhoneNumberValidator());
         }
     }
 }
