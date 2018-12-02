@@ -11,53 +11,39 @@ namespace ChessPhoneNumbers.Domain
     {
         public Vertex<Key> Position { get; private set; }
 
-        public IEnumerable<Move> GetPossibleMoves()
+        public virtual IEnumerable<Vertex<Key>> GetPossibleMoves()
         {
-            var moves = new List<Move>();
+            var moves = new List<Vertex<Key>>();
 
-            Stack<Move> edgesToCheck = new Stack<Move>();
+            Stack<Edge<Key>> edgesToCheck = new Stack<Edge<Key>>();
 
             foreach (var edge in Position.Edges)
             {
-                var move = new Move(edge.Destination, 1, Position);
-                move.Path.Add(edge);
-                edgesToCheck.Push(move);
+                edgesToCheck.Push(edge);
             }
 
             while (edgesToCheck.Count > 0)
             {
-                var move = edgesToCheck.Pop();
-
-                Edge<Key> edgeToCheck = move.Path[move.Path.Count - 1];
+                var edgeToCheck = edgesToCheck.Pop();
 
                 if (IsAcceptableEdge(edgeToCheck))
-                {                 
-                    moves.Add(move);
+                {
+                    moves.Add(edgeToCheck.Destination);
 
-                    if (!MaximumCostPerMove.HasValue || move.Cost < MaximumCostPerMove)
+                    if (!MaximumCostPerMove.HasValue || edgeToCheck.Cost < MaximumCostPerMove)
                     {
                         foreach (var edge in edgeToCheck.Destination.Edges)
                         {
                             if (edge.Direction == edgeToCheck.Direction && edge.Origin == edgeToCheck.Destination)
                             {
-                                var multipleCostMove = new Move(edgeToCheck.Destination, move.Cost, Position);
-                                multipleCostMove.Path.AddRange(move.Path);
-                                multipleCostMove.Path.Add(edgeToCheck);
-                                multipleCostMove.Cost += edgeToCheck.Cost;
-
-                                edgesToCheck.Push(multipleCostMove);
+                                edgesToCheck.Push(edge);
                             }
                         }
                     }
                 }
             }
 
-            return (from m in moves where IsAcceptableMove(m) select m);
-        }
-
-        protected virtual bool IsAcceptableMove(Move m)
-        {
-            return true;
+            return moves;
         }
 
         protected abstract bool IsAcceptableEdge(Edge<Key> edge);

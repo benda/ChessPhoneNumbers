@@ -16,7 +16,51 @@ namespace ChessPhoneNumbers.Domain
 
         protected override int? MaximumCostPerMove => 3;
 
-        protected override bool IsAcceptableMove(Move m)
+        public override IEnumerable<Vertex<Key>> GetPossibleMoves()
+        {
+            var moves = new List<Move>();
+
+            Stack<Move> edgesToCheck = new Stack<Move>();
+
+            foreach (var edge in Position.Edges)
+            {
+                var move = new Move(edge.Destination, 1, Position);
+                move.Path.Add(edge);
+                edgesToCheck.Push(move);
+            }
+
+            while (edgesToCheck.Count > 0)
+            {
+                var move = edgesToCheck.Pop();
+
+                Edge<Key> edgeToCheck = move.Path[move.Path.Count - 1];
+
+                if (IsAcceptableEdge(edgeToCheck))
+                {
+                    moves.Add(move);
+
+                    if (!MaximumCostPerMove.HasValue || move.Cost < MaximumCostPerMove)
+                    {
+                        foreach (var edge in edgeToCheck.Destination.Edges)
+                        {
+                            if (edge.Direction == edgeToCheck.Direction && edge.Origin == edgeToCheck.Destination)
+                            {
+                                var multipleCostMove = new Move(edgeToCheck.Destination, move.Cost, Position);
+                                multipleCostMove.Path.AddRange(move.Path);
+                                multipleCostMove.Path.Add(edgeToCheck);
+                                multipleCostMove.Cost += edgeToCheck.Cost;
+
+                                edgesToCheck.Push(multipleCostMove);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return (from m in moves where IsAcceptableMove(m) select m.Destination);
+        }
+
+        protected bool IsAcceptableMove(Move m)
         {
             if(m.Cost != 3)
             {

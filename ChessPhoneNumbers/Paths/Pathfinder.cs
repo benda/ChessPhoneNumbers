@@ -72,8 +72,8 @@ namespace ChessPhoneNumbers.Paths
             var moves = piece.GetPossibleMoves();
             foreach(var move in moves)
             {
-                piece.MoveTo(move.Destination);
-                var destinationChildTreeNode = currentPosition.AddChild(move.Destination.Item);
+                piece.MoveTo(move);
+                var destinationChildTreeNode = currentPosition.AddChild(move.Item);
                 BuildPathsTree(piece, validator, destinationChildTreeNode, currentDepth + 1);
             }
         }
