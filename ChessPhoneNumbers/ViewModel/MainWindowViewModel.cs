@@ -22,6 +22,7 @@ namespace ChessPhoneNumbers.ViewModel
         public MainWindowViewModel()
         {
             AllPieces = Pieces.GetValues();
+            SelectedPiece = AllPieces.First();
         }
 
         public void Find()

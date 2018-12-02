@@ -135,5 +135,13 @@
     <Resource Include="Readme.txt" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\bishop.png" />
+    <Resource Include="Resources\king.png" />
+    <Resource Include="Resources\knight.png" />
+    <Resource Include="Resources\pawn.png" />
+    <Resource Include="Resources\queen.png" />
+    <Resource Include="Resources\rook.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

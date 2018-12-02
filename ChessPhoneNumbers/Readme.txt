@@ -7,10 +7,4 @@
 	lazy load UI tree nodes (load only when clicked)
 	don't recalculate all moves for a piece at position
 	//pawns can only move 1 direction so we know pawn has no valid phone number so no need to implement
-        
-		Pawn: 0
-		Knight: 952
-		Bishop: 2341
-		Rook: 49326
-		Queen: 751503
-		King: 124908
+use commands not click event handler

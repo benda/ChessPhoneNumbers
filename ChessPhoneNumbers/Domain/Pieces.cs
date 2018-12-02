@@ -21,9 +21,11 @@ namespace ChessPhoneNumbers.Domain
         public Pieces(string name, Piece piece) : base(name)
         {
             Piece = piece;
+            ImageUrl = $"pack://application:,,,/ChessPhoneNumbers;component/resources/{Value}.png";
         }
 
         public Piece Piece { get; }
+        public string ImageUrl { get; }
 
         public static IEnumerable<Pieces> GetValues()
         {
