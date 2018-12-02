@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace ChessPhoneNumbers.Graphs
 {
-    [DebuggerDisplay("{Item}")]
     class Vertex<T>  
     {
         public List<Edge<T>> Edges { get; } = new List<Edge<T>>();
@@ -28,6 +27,11 @@ namespace ChessPhoneNumbers.Graphs
         public override int GetHashCode()
         {
             return -979861770 + EqualityComparer<T>.Default.GetHashCode(Item);
+        }
+
+        public override string ToString()
+        {
+            return Item.ToString(); 
         }
     }
 }

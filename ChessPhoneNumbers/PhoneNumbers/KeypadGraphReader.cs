@@ -12,33 +12,35 @@ namespace ChessPhoneNumbers.Graphs
     {
         public Keypad Read(String resourceName)
         {
+            Direction.Initialize();
+
             Graph<Key> graph = new Graph<Key>();
             Dictionary<int, Vertex<Key>> vertices = new Dictionary<int, Vertex<Key>>();
-
+          
             foreach(string edgeString in new ResourceReader().Get(resourceName).Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
                 string[] edgeInfo = edgeString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                int vertexAKey = int.Parse(edgeInfo[0].ToString());
-                int vertexBKey = int.Parse(edgeInfo[2].ToString());
+                int originVertexKey = int.Parse(edgeInfo[0].ToString());
+                int destinationVertexKey = int.Parse(edgeInfo[2].ToString());
 
-                if (!vertices.ContainsKey(vertexAKey))
+                if (!vertices.ContainsKey(originVertexKey))
                 {
-                    vertices.Add(vertexAKey, new Vertex<Key>(new Key(vertexAKey)));
+                    vertices.Add(originVertexKey, new Vertex<Key>(new Key(originVertexKey)));
                 }
 
-                if (!vertices.ContainsKey(vertexBKey))
+                if (!vertices.ContainsKey(destinationVertexKey))
                 {
-                    vertices.Add(vertexBKey, new Vertex<Key>(new Key(vertexBKey)));
+                    vertices.Add(destinationVertexKey, new Vertex<Key>(new Key(destinationVertexKey)));
                 }
 
-                var vertexA = vertices[vertexAKey];
-                var vertexB = vertices[vertexBKey];
+                var originVertex = vertices[originVertexKey];
+                var destinationVertex = vertices[destinationVertexKey];
 
-                Edge<Key> edge = new Edge<Key>(vertexA, vertexB, Direction.FromString(edgeInfo[1]));
-
-                vertexA.Edges.Add(edge);
-                vertexB.Edges.Add(edge);
+                Edge<Key> edge = new Edge<Key>(originVertex, destinationVertex, Direction.FromString(edgeInfo[1]));
+             
+                originVertex.Edges.Add(edge);
+                destinationVertex.Edges.Add(new Edge<Key>(edge.Destination, edge.Origin, edge.Direction.Opposite));
             }
 
             foreach(int vertex in vertices.Keys)

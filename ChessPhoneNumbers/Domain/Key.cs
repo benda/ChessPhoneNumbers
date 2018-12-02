@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace ChessPhoneNumbers.Domain
 {
-    [DebuggerDisplay("{Digit} {Character}")]
     class Key
     {
         public int? Digit { get; }
@@ -44,6 +43,11 @@ namespace ChessPhoneNumbers.Domain
             return hashCode;
         }
 
-        public bool IsCharacter {  get { return Character != null; } }
+        public bool IsCharacter { get { return Character != null; } }
+
+        public override string ToString()
+        {
+            return $"{Digit} {Character}"; //    [DebuggerDisplay("{Digit} {Character}")] doesn't handle drilling down multiple levels
+        }
     }
 }

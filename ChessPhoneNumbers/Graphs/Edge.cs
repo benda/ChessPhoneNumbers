@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace ChessPhoneNumbers.Graphs
 {
-    [DebuggerDisplay("{Origin} {Direction} {Destination}")]
     class Edge<T>
     {
         public Vertex<T> Origin { get; }
@@ -15,11 +14,16 @@ namespace ChessPhoneNumbers.Graphs
         public Direction Direction { get; }
         public int Cost { get; } = 1;
 
-        public Edge(Vertex<T> vertexA, Vertex<T> vertexB, Direction direction)
+        public Edge(Vertex<T> origin, Vertex<T> destination, Direction direction)
         {
-            Origin = vertexA;
-            Destination = vertexB;
+            Origin = origin;
+            Destination = destination;
             Direction = direction;
+        }
+
+        public override string ToString()
+        {
+            return $"{Origin} {Direction} {Destination}"; 
         }
     }
 }

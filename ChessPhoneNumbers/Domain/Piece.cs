@@ -9,8 +9,13 @@ namespace ChessPhoneNumbers.Domain
 {
     abstract class Piece
     {
-        public Vertex<Key> Position { get; set; }
+        public Vertex<Key> Position { get; private set; }
 
         public abstract IEnumerable<Edge<Key>> GetNextPotentialMoves();
+
+        public void MoveTo(Vertex<Key> newPosition)
+        {
+            Position = newPosition;
+        }
     }
 }
