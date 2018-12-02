@@ -11,9 +11,11 @@ namespace ChessPhoneNumbers.PhoneNumbers
 {
     class PhoneNumberService
     {
+        private static Keypad _keypad = new KeypadGraphReader().Read("ChessPhoneNumbers.Data.keypad.txt");
+
         public PathFinderResult FindAllPhoneNumbers(Piece piece)
         {
-            Pathfinder pf = new Pathfinder(new KeypadGraphReader().Read("ChessPhoneNumbers.Data.keypad.txt"));
+            Pathfinder pf = new Pathfinder(_keypad);
 
             return pf.FindAllPaths(piece, new PhoneNumberValidator());
         }

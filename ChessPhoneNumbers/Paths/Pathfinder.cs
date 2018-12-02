@@ -15,7 +15,7 @@ namespace ChessPhoneNumbers.Paths
             _keypad = keypad;
         }
 
-        public PathFinderResult FindAllPaths(Piece piece, IPathValidator validator)
+        public PathFinderResult FindAllPaths(Piece piece, IPathValidator<Key> validator)
         {
             List<Path> paths = new List<Path>();
 
@@ -30,11 +30,14 @@ namespace ChessPhoneNumbers.Paths
 
                     BuildPathsTree(piece, validator, _uniquePaths[startPosition.Item].Root, 1);
 
-                    paths.AddRange(BuildAllPathsForStartPosition(piece, startPosition.Item));
+                    if (validator.IsValid(tree))
+                    {
+                        paths.AddRange(BuildAllPathsForStartPosition(piece, startPosition.Item));
+                    }
                 }
             }
 
-            return new PathFinderResult(paths, _uniquePaths.Values);
+            return new PathFinderResult(paths, (from t in _uniquePaths.Values where validator.IsValid(t) select t));
         }
 
         private List<Path> BuildAllPathsForStartPosition(Piece piece, Key startPosition)
@@ -59,7 +62,7 @@ namespace ChessPhoneNumbers.Paths
             return allPaths;            
         }
 
-        private void BuildPathsTree(Piece piece, IPathValidator validator, TreeNode<Key> currentPosition, int currentDepth)
+        private void BuildPathsTree(Piece piece, IPathValidator<Key> validator, TreeNode<Key> currentPosition, int currentDepth)
         {
             if(!validator.IsValid(currentPosition,currentDepth))
             {

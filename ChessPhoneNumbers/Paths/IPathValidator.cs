@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace ChessPhoneNumbers.Paths
 {
-    interface IPathValidator
+    interface IPathValidator<T>
     {
-        bool IsValid(TreeNode<Key> currentPosition, int currentDepth);
+        bool IsValid(TreeNode<T> currentPosition, int currentDepth);
+        bool IsValid(Tree<Key> tree);
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ChessPhoneNumbers.PhoneNumbers
 {
-    class PhoneNumberValidator : IPathValidator
+    class PhoneNumberValidator : IPathValidator<Key>
     {
         private const int MaximumNumberOfDigitsInPhoneNumber = 7;
 
@@ -34,6 +34,11 @@ namespace ChessPhoneNumbers.PhoneNumbers
             }
 
             return true;
+        }
+
+        public bool IsValid(Tree<Key> tree)
+        {
+            return tree.Root.Children.Count > 0;
         }
     }
 }

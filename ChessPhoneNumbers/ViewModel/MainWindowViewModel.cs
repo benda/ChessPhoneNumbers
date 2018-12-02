@@ -17,6 +17,7 @@ namespace ChessPhoneNumbers.ViewModel
         private int? _numberOfPhoneNumbers;
         private PathFinderResult _result;
         private IEnumerable<TreeNodeViewModel> _trees;
+        private List<string> _phoneNumbers;
 
         public MainWindowViewModel()
         {
@@ -28,6 +29,20 @@ namespace ChessPhoneNumbers.ViewModel
             _result = new PhoneNumberService().FindAllPhoneNumbers(SelectedPiece.Piece);
             NumberOfPhoneNumbers = _result.AllPaths.Count;
             Trees = (from t in _result.PathTrees select new TreeNodeViewModel(t.Root));
+            List<string> phoneNumbers = new List<string>();
+
+            foreach(Path p in _result.AllPaths)
+            {
+                StringBuilder phoneNumber = new StringBuilder();
+                foreach(Key k in p.Keys)
+                {
+                    phoneNumber.Append(k.Digit);
+                }
+                phoneNumbers.Add(phoneNumber.ToString());
+            }
+
+            phoneNumbers.Sort();
+            PhoneNumbers = phoneNumbers;
         }
 
         public int? NumberOfPhoneNumbers
@@ -38,6 +53,17 @@ namespace ChessPhoneNumbers.ViewModel
             {
                 _numberOfPhoneNumbers = value;
                 OnPropertyChanged(nameof(NumberOfPhoneNumbers));
+            }
+        }
+
+        public List<string> PhoneNumbers
+        {
+            get { return _phoneNumbers; }
+
+            set
+            {
+                _phoneNumbers = value;
+                OnPropertyChanged(nameof(PhoneNumbers));
             }
         }
 

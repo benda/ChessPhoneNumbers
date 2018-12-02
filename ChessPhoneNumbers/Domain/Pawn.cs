@@ -9,9 +9,11 @@ namespace ChessPhoneNumbers.Domain
 {
     class Pawn : Piece
     {
-        public override IEnumerable<Edge<Key>> GetPossibleMoves()
+        protected override bool IsAcceptableEdge(Edge<Key> edge)
         {
-            return new List<Edge<Key>>(); //we know pawn has no valid phone number so no need to implement
+            return edge.Direction == Direction.North || edge.Direction == Direction.South;
         }
+
+        protected override int? MaximumCostPerMove => 1;
     }
 }

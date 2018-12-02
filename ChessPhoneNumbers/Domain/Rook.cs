@@ -9,9 +9,11 @@ namespace ChessPhoneNumbers.Domain
 {
     class Rook : Piece
     {
-        public override IEnumerable<Edge<Key>> GetPossibleMoves()
+        protected override bool IsAcceptableEdge(Edge<Key> edge)
         {
-            throw new NotImplementedException();
+            return !edge.Direction.IsDiagonal;
         }
+
+        protected override int? MaximumCostPerMove => null;
     }
 }

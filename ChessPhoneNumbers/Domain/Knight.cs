@@ -9,10 +9,11 @@ namespace ChessPhoneNumbers.Domain
 {
     class Knight : Piece
     {
-        public override IEnumerable<Edge<Key>> GetPossibleMoves()
+        protected override bool IsAcceptableEdge(Edge<Key> edge)
         {
             throw new NotImplementedException();
         }
 
+        protected override int? MaximumCostPerMove => null;
     }
 }
