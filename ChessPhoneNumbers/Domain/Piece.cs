@@ -11,10 +11,9 @@ namespace ChessPhoneNumbers.Domain
     {
         public Vertex<Key> Position { get; private set; }
 
-        public IEnumerable<Edge<Key>> GetPossibleMoves()
+        public IEnumerable<Move> GetPossibleMoves()
         {
-            var moves = new List<Edge<Key>>();
-            int cost = 0;
+            var moves = new List<Move>();
 
             Stack<Edge<Key>> edgesToCheck = new Stack<Edge<Key>>();
 
@@ -26,15 +25,16 @@ namespace ChessPhoneNumbers.Domain
             while (edgesToCheck.Count > 0)
             {
                 var edgeToCheck = edgesToCheck.Pop();
-                cost = 0;
 
                 if (IsAcceptableEdge(edgeToCheck))
                 {
-                    moves.Add(edgeToCheck);
-                    cost += edgeToCheck.Cost;
+                    var move = new Move(edgeToCheck.Destination, edgeToCheck.Direction, 1);
+                    moves.Add(move);
 
-                    if (!MaximumCostPerMove.HasValue || cost < MaximumCostPerMove)
+                    if (!MaximumCostPerMove.HasValue || move.Cost < MaximumCostPerMove)
                     {
+                        move.Cost += edgeToCheck.Cost;
+
                         foreach (var edge in edgeToCheck.Destination.Edges)
                         {
                             if (edge.Direction == edgeToCheck.Direction && edge.Origin == edgeToCheck.Destination)
