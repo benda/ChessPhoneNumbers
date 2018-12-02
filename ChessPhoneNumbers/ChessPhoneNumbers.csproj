@@ -91,7 +91,7 @@
     <Compile Include="PhoneNumbers\KeypadGraphReader.cs" />
     <Compile Include="Graphs\Vertex.cs" />
     <Compile Include="Paths\Path.cs" />
-    <Compile Include="Paths\Pathfinder.cs" />
+    <Compile Include="Paths\PathFinder.cs" />
     <Compile Include="Domain\Piece.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

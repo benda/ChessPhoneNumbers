@@ -5,12 +5,12 @@ using System.Linq;
 
 namespace ChessPhoneNumbers.Paths
 {
-    class Pathfinder
+    class PathFinder
     {
         private Keypad _keypad;
         private Dictionary<Key, Tree<Key>> _uniquePaths = new Dictionary<Key, Tree<Key>>();
 
-        public Pathfinder(Keypad keypad)
+        public PathFinder(Keypad keypad)
         {
             _keypad = keypad;
         }

@@ -11,7 +11,7 @@ namespace ChessPhoneNumbers.Domain
     {
         protected override bool IsAcceptableEdge(Edge<Key> edge)
         {
-            return edge.Direction == Direction.North || edge.Direction == Direction.South;
+            return false;
         }
 
         protected override int? MaximumCostPerMove => 1;

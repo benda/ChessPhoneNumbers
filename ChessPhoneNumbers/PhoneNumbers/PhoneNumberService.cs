@@ -15,7 +15,7 @@ namespace ChessPhoneNumbers.PhoneNumbers
 
         public PathFinderResult FindAllPhoneNumbers(Piece piece)
         {
-            Pathfinder pf = new Pathfinder(_keypad);
+            PathFinder pf = new PathFinder(_keypad);
 
             return pf.FindAllPaths(piece, new PhoneNumberValidator());
         }
