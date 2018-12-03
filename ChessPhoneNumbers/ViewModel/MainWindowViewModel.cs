@@ -53,9 +53,16 @@ namespace ChessPhoneNumbers.ViewModel
             foreach (Path p in _result.AllPaths)
             {
                 StringBuilder phoneNumber = new StringBuilder();
+                int count = 1;
                 foreach (Key k in p.Keys)
                 {
                     phoneNumber.Append(k.Digit);
+                    count++;
+
+                    if(count == 4)
+                    {
+                        phoneNumber.Append("-");
+                    }
                 }
                 phoneNumbers.Add(phoneNumber.ToString());
             }
