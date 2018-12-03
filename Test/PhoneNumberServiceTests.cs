@@ -16,8 +16,8 @@ namespace Test
             Assert.AreEqual(2341, pns.FindAllPhoneNumbers(Pieces.Bishop.Piece).AllPaths.Count);
             Assert.AreEqual(952, pns.FindAllPhoneNumbers(Pieces.Knight.Piece).AllPaths.Count);
             Assert.AreEqual(49326, pns.FindAllPhoneNumbers(Pieces.Rook.Piece).AllPaths.Count);
-            Assert.AreEqual(751503, pns.FindAllPhoneNumbers(Pieces.King.Piece).AllPaths.Count);
-            Assert.AreEqual(124908, pns.FindAllPhoneNumbers(Pieces.Queen.Piece).AllPaths.Count);
+            Assert.AreEqual(124908, pns.FindAllPhoneNumbers(Pieces.King.Piece).AllPaths.Count);
+            Assert.AreEqual(751503, pns.FindAllPhoneNumbers(Pieces.Queen.Piece).AllPaths.Count);
         }
     }
 }
